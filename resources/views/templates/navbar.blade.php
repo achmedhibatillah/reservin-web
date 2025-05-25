@@ -31,8 +31,13 @@
             </div>
             <div class="col-lg-3 pt-4 pb-2 d-none d-lg-flex justify-content-center align-items-center navbar-home-resp">
                 <div class="position-relative m-0">
-                    <a href="{{url('')}}" class="btn btn-outline-light rounded-pill pt-2 px-5 fsz-10 position-absolute" id="button-login">LOGIN</a>
-                    <p class="btn btn-outline-light btn-lg-dark rounded-pill pt-2 px-5 fsz-10" id="navbar-home-button">LOGIN</p>
+                    @if (session()->has('is_user'))
+                        <a href="{{url('profil')}}" class="btn btn-outline-light rounded-pill pt-2 px-5 fsz-10 position-absolute" id="button-login">PROFIL</a>
+                        <p class="btn btn-outline-light btn-lg-dark rounded-pill pt-2 px-5 fsz-10" id="navbar-home-button">PROFIL</p>
+                    @else 
+                        <a href="{{url('login')}}" class="btn btn-outline-light rounded-pill pt-2 px-5 fsz-10 position-absolute" id="button-login">LOGIN</a>
+                        <p class="btn btn-outline-light btn-lg-dark rounded-pill pt-2 px-5 fsz-10" id="navbar-home-button">LOGIN</p>
+                    @endif
                 </div>
             </div>
         </div>

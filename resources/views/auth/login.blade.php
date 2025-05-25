@@ -8,7 +8,7 @@
                 <a href="{{ url('registrasi') }}" class="text-light td-none">Daftar</a>
             </div>
         </div>
-        <div class="mb-3">
+        <div class="mb-2">
             @include('templates/flashdata')
         </div>
         <div class="">
@@ -19,11 +19,17 @@
             @csrf
             <div class="mb-3">
                 <label for="customer_email" class="fsz-10">Email</label>
-                <input type="text" name="customer_email" class="form-control fsz-10 he-40" id="customer_email" value="{{ old('customer_email') }}" placeholder="reservin@gmail.com">
+                <input type="text" name="customer_email" class="form-control fsz-10 he-40 @error('customer_email') is-invalid @enderror" id="customer_email" value="{{ old('customer_email') }}" placeholder="reservin@gmail.com">
+                @error('customer_email')
+                    <div class="fsz-8 text-danger mt-2 ms-2"><i class="fas fa-exclamation-circle me-1"></i>{{ $message }}</div>
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="customer_pass" class="fsz-10">Password</label>
-                <input type="password" name="customer_pass" class="form-control fsz-10 he-40" placeholder="Your password">
+                <input type="password" name="customer_pass" class="form-control fsz-10 he-40 @error('customer_pass') is-invalid @enderror" placeholder="Your password">
+                @error('customer_pass')
+                    <div class="fsz-8 text-danger mt-2 ms-2"><i class="fas fa-exclamation-circle me-1"></i>{{ $message }}</div>
+                @enderror
             </div>
             <div class="d-flex justify-content-end mb-3">
                 <a href="{{ url('') }}" class="td-hover text-clrgold fsz-10 text-end">Lupa password?</a>

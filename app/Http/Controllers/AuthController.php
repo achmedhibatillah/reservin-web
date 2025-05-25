@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
@@ -19,9 +17,15 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
+        $page = session()->has('page_redirect') ? session('page_redirect') : 'profile';
+
         $request->validate([
             'customer_email' => 'required|email',
-            'customer_pass'  => 'required'
+            'customer_pass'  => 'required', 
+        ], [
+            'customer_email.required' => 'Email harus diisi.',
+            'customer_email.email' => 'Email tidak valid.',
+            'customer_pass.required' => 'Password harus diisi.',
         ]);
 
         $response = Http::asForm()->post(env('API_SERVER') . 'login/user', [
@@ -31,15 +35,16 @@ class AuthController extends Controller
         ]);
 
         if ($response->successful() && $response['status'] === 'success') {
-            session()->set([
-                'status' => 'user',
+            session([
+                'is_user' => true,
                 'customer' => $response['customer']
             ]);
 
-            // return redirect()->
+            session()->forget('page_redirect');
+            return redirect()->to($page);
         }
 
-        return redirect()->back()->with('error', 'Autentikasi gagal.');
+        return redirect()->back()->with('error', 'Autentikasi gagal.')->withInput();
     }
 
     public function dashboard()
