@@ -1,0 +1,83 @@
+#navbar-home {
+    position: fixed;
+    width: 100%;
+}
+
+#navbar-home-menu {
+    background-color: #F0EFEF;
+    border-end-start-radius: 40px;
+    border-end-end-radius: 40px;
+}
+
+#button-login {
+    border: 1px solid #ffffff;
+    background-color: #ffffff;
+    color: #ffffff;
+    opacity: 0.2;
+}
+
+#button-login-scrolled {
+    border: 1px solid #ffffff;
+    background-color: #000000;
+    opacity: 0.8;
+}
+
+.position-right-center {
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 4.5px 11.5px 0px 0;
+}
+
+.marquee { overflow: hidden; white-space: nowrap; box-sizing: border-box; position: relative; }
+.marquee-content { display: inline-flex; min-width: 200%; }
+.marquee-top .marquee-content { animation: marquee-left 20s linear infinite; }
+.marquee-bottom .marquee-content { animation: marquee-right 20s linear infinite; }
+@keyframes marquee-left { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+@keyframes marquee-right { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
+.gal-top { margin-right: 16px; height: 180px; }
+.gal-bottom { margin-right: 16px; height: 210px; }
+
+
+
+
+@media screen and (max-width: 992px) {
+    #navbar-home-content {
+        background-color: #F0EFEF;
+        border-end-start-radius: 40px;
+        border-end-end-radius: 40px;
+    }
+    
+    #navbar-home-menu {
+        background-color: transparent;
+        border-end-start-radius: 40px;
+        border-end-end-radius: 40px;
+    }
+}
+
+
+/* Other App Style */
+
+:root {
+    --clrdang: #cd3000;
+    --clrsecdang: #EA4335;
+    --clrsecdark: #2b2b2b;
+    --clrdark: #1D1D1F;
+    --clrgold: #FA8B02;
+    --clrsecgold: #8b5411;
+}
+
+.text-clrgold { color: var(--clrgold); }
+
+.bg-clrdang { background-color: var(--clrsecdang); }
+.bg-clrdark { background-color: var(--clrdark); }
+
+.border-clrgold { border: 1px solid var(--clrgold); }
+.border-clrsecgold { border: 1px solid var(--clrgold); }
+
+.btn-clrdang { background-color: var(--clrdang); color: #ffffff; }
+.btn-clrdang:hover { background-color: var(--clrdang); color: #ffffff; filter: brightness(90%); }
+.btn-clrsecdark { background-color: var(--clrsecdark); color: #ffffff; }
+.btn-clrsecdark:hover { background-color: var(--clrsecdark); color: #ffffff; filter: brightness(90%); }
+.btn-clrgold { background-color: var(--clrgold); color: #ffffff; }
+.btn-clrgold:hover { background-color: var(--clrgold); color: #ffffff; filter: brightness(90%); }
