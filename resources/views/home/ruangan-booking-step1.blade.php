@@ -3,9 +3,11 @@
     <div class="row">
         <div class="col-md-7">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-xl-6">
                     <div class="card p-3 rounded @error('booking_date') bg-clrdang @else bg-light @enderror">
-                        <div id="kalender"></div>
+                        <div class="d-flex justify-content-center">
+                            <div id="kalender"></div>
+                        </div>
                         @error('booking_date')
                             <p class="m-0 mt-3 text-light fsz-10"><i class="fas fa-exclamation-circle me-2"></i>{{ $message }}</p>
                         @enderror
@@ -29,6 +31,8 @@
                         flatpickr("#kalender", {
                             inline: true,
                             monthSelectorType: "static",
+                            minDate: new Date(Date.now() + 86400000),
+                            maxDate: new Date(Date.now() + 86400000 * 31),
                             onChange: function(selectedDates, dateStr) {
                                 const input = document.getElementById("booking_date_que1");
                                 input.value = dateStr;
@@ -38,9 +42,9 @@
                         });
                     </script>
                 </div>
-                <div class="col-md-6 p-2 p-md-0">
-                    <div class="card mt-3 mt-md-0">
-                        <ul class="m-2" id="booked"></ul>
+                <div class="col-xl-6 p-2 p-xl-0">
+                    <div class="card mt-3 mt-xl-0">
+                        <div class="m-2 fsz-11" id="booked"></div>
                     </div>
                     @php
                         $startHour = (int) \Carbon\Carbon::parse($room['room_start'])->format('H');
@@ -126,14 +130,8 @@
 
 <style>
 .flatpickr-calendar {
-width: 100% !important;
-max-width: 100% !important;
-}
-
-.flatpickr-innerContainer,
-.flatpickr-rContainer,
-.flatpickr-days {
-width: 100% !important;
+/* width: 200px !important; */
+/* max-width: 100% !important; */
 }
 </style>
     

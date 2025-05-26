@@ -17,7 +17,7 @@ class CustomerMiddleware
     {
         if ($request->session()->get('is_user') !== true) {
             $request->session()->put('page_redirect', $request->fullUrl());
-            return redirect('login')->with('error', 'You must be logged in.');
+            return redirect('login')->with('warning', 'You must be logged in.');
         }
 
         return $next($request);

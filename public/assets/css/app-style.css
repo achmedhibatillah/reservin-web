@@ -63,14 +63,20 @@
     --clrsecdang: #EA4335;
     --clrsecdark: #2b2b2b;
     --clrdark: #1D1D1F;
+    --clrsec: #4D5259;
     --clrgold: #FA8B02;
     --clrsecgold: #8b5411;
+    --clrprim: #c4f3fc;
+    --clrsuc: #25cb00;
 }
 
 .text-clrgold { color: var(--clrgold); }
+.text-clrsuc { color: var(--clrsuc); }
 
 .bg-clrdang { background-color: var(--clrsecdang); }
 .bg-clrdark { background-color: var(--clrdark); }
+.bg-clrsec { background-color: var(--clrsec); }
+.bg-clrprim { background-color: var(--clrprim); }
 
 .border-clrgold { border: 1px solid var(--clrgold); }
 .border-clrsecgold { border: 1px solid var(--clrgold); }

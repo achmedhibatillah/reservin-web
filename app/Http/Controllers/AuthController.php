@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
@@ -12,6 +14,30 @@ class AuthController extends Controller
         return 
         view('templates/header') . 
         view('auth/login') . 
+        view('templates/footer');
+    }
+
+    public function showRegistrasiForm()
+    {
+        return 
+        view('templates/header') . 
+        view('auth/registrasi') . 
+        view('templates/footer');
+    }
+
+    public function showPasswordRegistrasiForm()
+    {
+        if (!session()->has('customerNew')) {
+            return redirect()->to('registrasi')->with('warning', 'Masukkan kembali nama lengkap dan email.');
+        }
+        
+        $customerNew = session('customerNew');
+
+        return 
+        view('templates/header') . 
+        view('auth/registrasi-password', [
+            'customer' => $customerNew,
+        ]) . 
         view('templates/footer');
     }
 
@@ -45,6 +71,64 @@ class AuthController extends Controller
         }
 
         return redirect()->back()->with('error', 'Autentikasi gagal.')->withInput();
+    }
+
+    public function registrasi(Request $request)
+    {
+        $request->validate([
+            'customer_fullname' => 'required|max:255',
+            'customer_email' => 'required|email|max:255',
+        ], [
+            'customer_fullname.required' => 'Nama lengkap harus diisi.',
+            'customer_fullname.max' => 'Maksimal 255 karakter.',
+            'customer_email.required' => 'Email harus diisi.',
+            'customer_email.email' => 'Email tidak valid.',
+            'customer_email.max' => 'Maksimal 255 karakter.',
+        ]);
+
+        if ($request->has('customer_pass')) {
+            $customerData = [
+                'customer_fullname' => $request->customer_fullname,
+                'customer_email' => $request->customer_email,
+            ];
+        
+            $validator = Validator::make($request->all(), [
+                'customer_pass' => 'required|confirmed|min:8|max:20',
+            ], [
+                'customer_pass.required' => 'Password harus diisi.',
+                'customer_pass.confirmed' => 'Konfirmasi password harus sama.',
+                'customer_pass.min' => 'Minimal 8 karakter.',
+                'customer_pass.max' => 'Maksimal 20 karakter.',
+            ]);
+        
+            if ($validator->fails()) {
+                return back()
+                    ->withErrors($validator)
+                    ->withInput()
+                    ->with('customerNew', $customerData);
+            }
+
+            Customer::addCustomer([
+                'customer_fullname' => $request->customer_fullname,
+                'customer_email' => $request->customer_email,
+                'customer_pass' => $request->customer_pass,
+            ]);
+
+            return redirect()->to('login')->with('success', 'Anda berhasil membuat akun. Silakan login menggunakan akun yang telah Anda buat.');
+        }
+        
+
+        $customer = Customer::getCustomerByEmail($request->customer_email);
+        if ($customer['status'] == 'exists') {
+            return redirect()->back()->with('error', 'Email sudah digunakan.')->withInput();
+        }
+
+        $customerData = [
+            'customer_fullname' => $request->customer_fullname,
+            'customer_email' => $request->customer_email,
+        ];
+
+        return redirect()->to('registrasi/set-password')->with('customerNew', $customerData);
     }
 
     public function dashboard()

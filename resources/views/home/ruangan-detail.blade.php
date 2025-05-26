@@ -1,4 +1,10 @@
-<div class="bg-clr3">
+<div class="bg-clr3 position-relative">
+    <div class="position-absolute d-flex justify-content-start" style="top:0;left:0;">
+        <img src="{{ asset('assets/images/static/effect/sun-gold-left-top.svg') }}" class="w-75">
+    </div>
+    <div class="position-absolute d-flex justify-content-end" style="bottom:0;right:0;">
+        <img src="{{ asset('assets/images/static/effect/sun-gold-right-bottom.svg') }}" class="w-75">
+    </div>
     <div class="container">
         <div class="row m-0" style="padding-top:160px;padding-bottom:110px">
             <div class="col-md-7">
@@ -11,34 +17,33 @@
                     @elseif(count($room['images']) === 2)
                         <div class="row">
                             <div class="col-md-6 p-1">
-                                <div class="bg-web rounded" style="height:200px;background-image:url('{{ $room['images'][0]['ri_image'] }}')">
-                                </div>
+                                <div class="bg-web rounded" style="height:200px;background-image:url('{{ $room['images'][0]['ri_image'] }}')"></div>
                             </div>
                             <div class="col-md-6 p-1">
-                                <div class="bg-web rounded" style="height:200px;background-image:url('{{ $room['images'][1]['ri_image'] }}')">
-                                </div>
+                                <div class="bg-web rounded" style="height:200px;background-image:url('{{ $room['images'][1]['ri_image'] }}')"></div>
                             </div>
                         </div>
-                        <a href="#" class="td-hover text-clr2 mt-3 d-block" data-bs-toggle="modal" data-bs-target="#modalFoto">Lihat semua foto <i class="fas fa-arrow-right"></i></a>
+                        <a href="#" class="td-hover text-clr2 mt-3 d-block" data-bs-toggle="modal" data-bs-target="#modalFoto">
+                            Lihat semua foto <i class="fas fa-arrow-right"></i>
+                        </a>
                     @elseif(count($room['images']) > 2)
                         <div class="row">
                             <div class="col-6 p-1">
-                                <div class="bg-web rounded" style="height:410px;background-image:url('{{ $room['images'][0]['ri_image'] }}')">
-                                </div>
+                                <div class="bg-web rounded" style="height:410px;background-image:url('{{ $room['images'][0]['ri_image'] }}')"></div>
                             </div>
                             <div class="col-6 p-1">
-                                <div class="bg-web rounded" style="height:200px;background-image:url('{{ $room['images'][1]['ri_image'] }}')">
-                                </div>
-                                <div class="bg-web rounded mt-2" style="height:200px;background-image:url('{{ $room['images'][2]['ri_image'] }}')">
-                                </div>
+                                <div class="bg-web rounded" style="height:200px;background-image:url('{{ $room['images'][1]['ri_image'] }}')"></div>
+                                <div class="bg-web rounded mt-2" style="height:200px;background-image:url('{{ $room['images'][2]['ri_image'] }}')"></div>
                             </div>
-                            <div class="col-6 p-1">
-                            </div>
+                            <div class="col-6 p-1"></div>
                         </div>
-                        <a href="#" class="td-hover text-clr2 mt-3 d-block" data-bs-toggle="modal" data-bs-target="#modalFoto">Lihat semua foto <i class="fas fa-arrow-right"></i></a>                    </div>
-                    @endif            
-                </div>    
-            </div>
+                        <a href="#" class="td-hover text-clr2 mt-3 d-block" data-bs-toggle="modal" data-bs-target="#modalFoto">
+                            Lihat semua foto <i class="fas fa-arrow-right"></i>
+                        </a>
+                    @endif
+                </div> {{-- ini penutup div .mt-3 --}}
+            </div> {{-- ini penutup col-md-7 --}}
+            
             <div class="col-md-4">
                 <h1 class="text-clr3">{{ $room['room_name'] }}</h1>
                 <div class="card bg-clr4 p-3 mt-3">
@@ -47,7 +52,7 @@
                         <div class="mt-3 mx-3">
                             <div class="d-flex align-items-center gap-4 text-light">
                                 <i class="fas fa-users"></i>
-                                <p class="m-0">{{ $room['room_capacity'] }}</p>
+                                <p class="m-0">{{ $room['room_capacity'] }} orang</p>
                             </div>
                             <div class="mt-3 d-flex align-items-center gap-4 text-light">
                                 <i class="fas fa-clock"></i>

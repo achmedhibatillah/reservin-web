@@ -16,20 +16,36 @@
                                 </div>
                                 <div class="col-8 d-flex flex-column p-3">
                                     <h5 class="text-dark fw-bold">{{ $x['room_name'] }}</h5>
+                                    <div class="d-flex">
+                                        <div class="fsz-10 bg-clrprim m-0 text-primary shadow-s px-2 rounded-pill">{{ $x['room_kategori'] }}</div>
+                                    </div>
                                     <div class="d-flex gap-2 text-clrsuccess">
                                         @foreach ($x['facility'] as $f)
                                             <p class="fsz-8 m-0"><i class="fas fa-circle fsz-6 me-1"></i>{{ $f['facility_name'] }}</p>
                                         @endforeach
                                     </div>
                                     <hr>
-                                    <div class="d-flex gap-2 fsz-9">
-                                        <p class="m-0">{{ $x['room_capacity'] }} orang</p>
-                                        <p>|</p>
-                                        <p class="m-0">Rp. {{ $x['room_price'] }} / jam</p>
+                                    <div class="d-flex flex-column fsz-9 mb-3 text-clrsuc">
+                                        <div class="d-flex align-items-center gap-1">
+                                            <i class="fas fa-user m-0 we-15"></i>
+                                            <p class="m-0">Kapasitas {{ $x['room_capacity'] }} orang</p>
+                                        </div>
+                                        <div class="d-flex align-items-center gap-1">
+                                            <i class="fas fa-clock m-0 we-15"></i>
+                                            <p class="m-0">{{ $x['room_start'] }} - {{ $x['room_end'] }}</p>
+                                        </div>
                                     </div>
                                     <p class="text-secondary">{{ $x['room_desc'] }}</p>
-                                    <div class="">
-                                        <a href="{{ url('ruangan/' . $x['room_id']) }}" class="btn btn-clr2 rounded-pill lh-1 fsz-10">Lihat selengkapnya</a>
+                                    <div class="row">
+                                        <div class="col-lg-6 pb-2 pb-lg-0">
+                                            <p class="m-0 text-clr2 fw-bold">Rp. {{ $x['room_price'] }} / jam</p>
+                                            <p class="m-0 text-secondary fsz-8 lh-1">Termasuk biaya operasional dan pajak.</p>
+                                        </div>
+                                        <div class="col-lg-6 d-flex justify-content-start justify-content-lg-center align-items-end">
+                                            <div class="">
+                                                <a href="{{ url('ruangan/' . $x['room_id']) }}" class="btn btn-clr2 rounded-pill lh-1 fsz-10">Lihat selengkapnya</a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
