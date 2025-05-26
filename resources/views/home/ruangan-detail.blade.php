@@ -92,7 +92,7 @@
                         </div>
                     </div>
                     <div class="mt-5">
-                        <a href="{{ url('ruangan/' . $room['room_id'] . '/booking') }}" class="btn btn-outline-light rounded-pill w-100">Pesan Sekarang</a>
+                        <a href="{{ url('booking/' . $room['room_id']) }}" class="btn btn-outline-light rounded-pill w-100">Pesan Sekarang</a>
                     </div>
                 </div>
             </div>

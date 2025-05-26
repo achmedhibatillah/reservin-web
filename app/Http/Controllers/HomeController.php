@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Booking;
+use App\Models\Qris;
 use App\Models\Room;
 use Illuminate\Http\Request;
 
@@ -63,76 +64,6 @@ class HomeController extends Controller
         $roomData = Room::getDetailRoomWIthSchedule($room_id);
         $step = [true, false, false];
         $bookingData =[];
-    
-        if ($request->has('step-1')) {
-            $request->validate([
-                'booking_date' => 'required',
-                'booking_start' => 'required',
-                'booking_end' => 'required',
-            ], [
-                'booking_date.required' => 'Tanggal harus dimasukkan.',
-                'booking_start.required' => 'Waktu harus dimasukkan.',
-                'booking_end.required' => 'Waktu harus dimasukkan.'
-            ]);
-        
-            $roomDetail = Room::getDetailRoomWIthSchedule($room_id);
-            $schedule = $roomDetail['schedule'] ?? [];
-        
-            $selectedDate = $request->booking_date;
-            $startInput = $request->booking_start;
-            $endInput = $request->booking_end;
-        
-            $startInput = strtotime($startInput);
-            $endInput = strtotime($endInput);
-        
-            $conflicts = array_filter($schedule, function ($item) use ($selectedDate, $startInput, $endInput) {
-                if ($item['booking_date'] !== $selectedDate) {
-                    return false;
-                }
-        
-                $bookedStart = strtotime($item['booking_start']);
-                $bookedEnd = strtotime($item['booking_end']);
-        
-                return $startInput < $bookedEnd && $endInput > $bookedStart;
-            });
-        
-            if (count($conflicts) > 0) {
-                return back()->withErrors([
-                    'booking_start' => 'Waktu yang Anda pilih bertabrakan dengan jadwal yang sudah ada.',
-                    'booking_end' => 'Silakan pilih waktu yang lain.'
-                ])->withInput();
-            }
-        
-            $step = [true, true, false];
-            $bookingData = [
-                'customer_fullname' => session('customer')['customer_fullname'],
-                'customer_email' => session('customer')['customer_email'],
-                'booking_date' => $request->booking_date,
-                'booking_start' => $request->booking_start,
-                'booking_end' => $request->booking_end,
-                'booking_price' => $request->booking_price,
-                'booking_price_formated' => $request->booking_price_formated,
-                'booking_duration' => $request->booking_duration
-            ];
-            session(['booking_data' => $bookingData]);
-        }
-
-        if ($request->has('step-2')) {
-            $bookingData = session('booking_data', []);
-            $response = Booking::addBooking([
-                'room_id' => $roomData['room_id'],
-                'customer_id' => session('customer')['customer_id'],
-                'booking_date' => $bookingData['booking_date'],
-                'booking_start' => $bookingData['booking_start'],
-                'booking_end' => $bookingData['booking_end'],
-                'booking_price' => $bookingData['booking_price'],
-                'booking_desc' => $request->booking_desc,
-            ]);
-            
-            $bookingResponse = Booking::getDetailBooking($response['data']['booking_id']);
-            $bookingData['booking_code'] = $bookingResponse['booking_code'];
-            $step = [true, true, true];
-        }
 
         if ($request->has('step-3')) {
             $stepview = 'stepcompleted';
@@ -157,6 +88,76 @@ class HomeController extends Controller
             ]) . 
             view('templates/footbar') . 
             view('templates/footer');
+    }
+
+    public function booking($room_id)
+    {
+        $roomData = Room::getDetailRoomWIthSchedule($room_id);
+        $step = [true, false, false];
+        $bookingData =[];
+        $stepview = 'step1';
+
+        return 
+        view('templates/header') . 
+        view('templates/navbar') . 
+        view('home/ruangan-booking', [
+            'room' => $roomData,
+            'step' => $step,
+            'stepview' => $stepview,
+            'booking' => $bookingData,
+        ]) . 
+        view('templates/footbar') . 
+        view('templates/footer');
+    }
+
+    public function booking_konfirmasi($room_id)
+    {
+        if (!session()->has('booking_data')) {
+            return redirect()->to('booking/' . $room_id);
+        }
+
+        $roomData = Room::getDetailRoomWIthSchedule($room_id);
+        $step = [true, true, false];
+        $bookingData = session('booking_data');
+        $stepview = 'step2';
+
+        return 
+        view('templates/header') . 
+        view('templates/navbar') . 
+        view('home/ruangan-booking', [
+            'room' => $roomData,
+            'step' => $step,
+            'stepview' => $stepview,
+            'booking' => $bookingData,
+        ]) . 
+        view('templates/footbar') . 
+        view('templates/footer');
+    }
+
+    public function booking_pembayaran($booking_code)
+    {
+
+        $bookingData = Booking::getDetailBookingByCode($booking_code);
+        $bookingData = $bookingData['data'];
+        $bookingData['booking_price_formated'] = session('booking_data')['booking_price_formated'];
+        $bookingData['booking_duration'] = session('booking_data')['booking_duration'];
+        
+        $roomData = Room::getDetailRoom($bookingData['room_id']);
+
+        $step = [true, true, true];
+        $stepview = 'step3';
+
+        return 
+        view('templates/header') . 
+        view('templates/navbar') . 
+        view('home/ruangan-booking', [
+            'room' => $roomData,
+            'step' => $step,
+            'stepview' => $stepview,
+            'booking' => $bookingData,
+        ]) . 
+        view('templates/footbar') . 
+        view('templates/footer');
     }
 
     public function check()

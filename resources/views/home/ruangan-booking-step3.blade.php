@@ -7,10 +7,11 @@
                         <h5 class="fw-bold mb-3">Scan QR Code</h5>
                         <div class="mb-3">
                             <p class="m-0">Reservin Space</p>
-                            <p class="m-0">NMID: {{ $booking['booking_code'] }}</p>
+                            <p class="m-0">NMID: {{ $booking['qris_nmid'] }}</p>
                         </div>
                         <div class="d-flex justify-content-center mb-4">
-                            <img src="{{ asset('assets/images/static/effect/qris-il.svg') }}" alt="">
+                            {{-- <img src="{{ asset('assets/images/static/effect/qris-il.svg') }}" alt=""> --}}
+                            {!! QrCode::size(150)->generate($booking['booking_code']) !!}
                         </div>
                         <p>Selesaikan pembayaran sebelum</p>
                         <div class="d-flex fw-bold">

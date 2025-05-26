@@ -1,6 +1,6 @@
 <div class="pb-5">
     <div class="container">
-        <form action="{{ url('ruangan/' . $room['room_id'] . '/booking') }}" method="post">
+        <form action="{{ url('booking-konfirmasi') }}" method="post">
             @csrf 
             <div class="row">
                 <div class="col-md-7">
@@ -16,7 +16,10 @@
                             </div>
                             <div class="card bg-clrsec p-3 mb-3 text-light">
                                 <p class="fsz-10 m-0 mb-1">Tujuan Peminjaman</p>
-                                <textarea name="booking_desc" id="booking_desc" cols="30" rows="6" class="form-control bg-transparent p-2 text-light" placeholder="Isi di sini..."></textarea>
+                                @error('booking_desc')
+                                    <div class="fsz-8 text-warning mb-2"><i class="fas fa-exclamation-circle me-2"></i>{{ $message }}</div>
+                                @enderror
+                                <textarea name="booking_desc" id="booking_desc" cols="30" rows="6" class="form-control p-2 text-light fsz-10 @error('booking_desc') is-invalid @enderror bg-transparent" placeholder="Isi di sini..."></textarea>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -76,6 +79,7 @@
                             </div>
                         </div>
                         <div class="mt-5">
+                            <input type="hidden" name="room_id" value="{{ $room['room_id'] }}">
                             <input type="hidden" name="step-2">
                             <button type="submit" class="btn btn-outline-light rounded-pill w-100">Konfirmasi</button>
                         </div>

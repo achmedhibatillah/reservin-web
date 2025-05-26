@@ -15,7 +15,18 @@ class Booking extends Model
 
         return $response->json();
     }
-    public static function addBooking($bookingData)
+
+    public static function getDetailBookingByCode($booking_code)
+    {
+        $response = Http::post(env('API_SERVER') . 'booking/detail-code', [
+            'access_token' => env('API_ACCESS_TOKEN'),
+            'booking_code' => $booking_code,
+        ]);
+
+        return $response->json();
+    }
+
+    public static function addBooking($bookingData = [])
     {
         $response = Http::post(env('API_SERVER') . 'booking/add', [
             'access_token' => env('API_ACCESS_TOKEN'),
@@ -27,6 +38,20 @@ class Booking extends Model
             'booking_price' => $bookingData['booking_price'],
             'booking_desc' => $bookingData['booking_desc'],
             'booking_status' => 0,
+        ]);
+
+        return $response->json();
+    }
+
+    public static function qrisBooking($bookingData)
+    {
+        $response = Http::put(env('API_SERVER') . 'booking/update', [
+            'access_token' => env('API_ACCESS_TOKEN'),
+            'booking_id' => $bookingData['booking_id'],
+            'qris_url' => $bookingData['qris_url'],
+            'qris_content' => $bookingData['qris_content'],
+            'qris_invoiceid' => $bookingData['qris_invoiceid'],
+            'qris_nmid' => $bookingData['qris_nmid']
         ]);
 
         return $response->json();

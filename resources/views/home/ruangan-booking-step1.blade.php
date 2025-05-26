@@ -1,4 +1,4 @@
-<form action="{{ url('ruangan/' . $room['room_id'] . '/booking') }}" method="post" class="pb-5">
+<form action="{{ url('booking') }}" method="post" class="pb-5">
     @csrf
     <div class="row">
         <div class="col-md-7">
@@ -22,6 +22,7 @@
                             </div>
                         </div>
                     </div>
+                    <input type="hidden" name="room_id" value="{{ $room['room_id'] }}">
                     <input type="hidden" name="booking_date_que1" id="booking_date_que1">
                     <input type="hidden" name="booking_date" id="booking_date" value="{{ old('booking_date') }}">
                     <input type="hidden" name="booking_duration" id="booking_duration" value="">
