@@ -74,6 +74,33 @@ class Room
         return new LengthAwarePaginator([], 0, $perPage, $currentPage);
     }
 
+    public static function searchRoomBySchedule($date, $start, $end, $perPage = 4, $currentPage = 1)
+    {
+        $response = Http::get(env('API_SERVER') . 'room/search-schedule', [
+            'date' => $date,
+            'start' => $start,
+            'end'   => $end,
+            'access_token' => env('API_ACCESS_TOKEN')
+        ]);
+
+        if ($response->successful()) {
+            $data = collect($response->json())->values();
+
+            $offset = ($currentPage - 1) * $perPage;
+            $pagedItems = $data->slice($offset, $perPage)->values();
+
+            return new LengthAwarePaginator(
+                $pagedItems,
+                $data->count(),
+                $perPage,
+                $currentPage,
+                ['path' => request()->url(), 'query' => request()->query()]
+            );
+        }
+
+        return new LengthAwarePaginator([], 0, $perPage, $currentPage);
+    }
+
     public static function getDetailRoom($room_id)
     {
         $response = Http::get(env('API_SERVER') . 'room/detail/' . $room_id, [

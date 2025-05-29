@@ -30,9 +30,9 @@ class Customer extends Model
 		return $response->json();
 	} 
 
-	public static function getCustomerByEmail($customer_email)
+	public static function getCustomerByEmailNormal($customer_email)
 	{
-		$response = Http::post(env('API_SERVER') . 'customer/detail/email', [
+		$response = Http::post(env('API_SERVER') . 'customer/detail/email-normal', [
 			'access_token' => env('API_ACCESS_TOKEN'),
 			'customer_email' => $customer_email,
 		]);

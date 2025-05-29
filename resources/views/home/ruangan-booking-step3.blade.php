@@ -10,11 +10,11 @@
                             <p class="m-0">NMID: {{ $booking['qris_nmid'] }}</p>
                         </div>
                         <div class="d-flex justify-content-center mb-4">
-                            {{-- <img src="{{ asset('assets/images/static/effect/qris-il.svg') }}" alt=""> --}}
                             {!! QrCode::size(150)->generate($booking['booking_code']) !!}
                         </div>
-                        <p>Selesaikan pembayaran sebelum</p>
-                        <div class="d-flex fw-bold">
+                        <p class="m-0">Selesaikan pembayaran sebelum</p>
+                        <h4 class="fw-bold text-clr2 mt-2" id="end-payment"></h4>
+                        <div class="d-flex fw-bold mt-3">
                             <p class="m-0">Total Harga :</p>
                             <p class="m-0 ms-auto">{{ $booking['booking_price_formated'] }}</p>
                         </div>
@@ -58,14 +58,32 @@
                             </div>
                         </div>
                     </div>
-                    <div class="mt-5">
-                        <form action="{{ url('ruangan/' . $room['room_id'] . '/booking') }}" method="post">
-                            {{-- <input type="hidden" name="step-2"> --}}
-                            <button type="submit" class="btn btn-outline-light rounded-pill w-100">Konfirmasi</button>
-                        </form>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+const endPaymentUtc = new Date("{{ $booking['end_payment'] }}");
+
+const endPaymentJakarta = new Date(endPaymentUtc.getTime() + (7 * 60 * 60 * 1000));
+
+const interval = setInterval(() => {
+    const now = new Date();
+    const diff = endPaymentJakarta - now;
+
+    if (diff <= 0) {
+        document.getElementById("end-payment").innerText = "00:00";
+        clearInterval(interval);
+        return;
+    }
+
+    const minutes = Math.floor(diff / 1000 / 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+
+    const formatTime = (n) => (n < 10 ? '0' + n : n);
+
+    document.getElementById("end-payment").innerText = `${formatTime(minutes)}:${formatTime(seconds)}`;
+}, 1000);
+</script>

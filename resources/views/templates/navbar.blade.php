@@ -1,4 +1,4 @@
-<div id="navbar-home" style="z-index:10">
+<div id="navbar-home" style="z-index:10" data-aos="fade-down" data-aos-mirror="false" data-aos-delay="10" data-aos-easing="ease-in-out-back">
     <div class="container">
         <div class="row" id="navbar-home-content">
             <div class="col-lg-3 py-3 d-flex justify-content-center">
@@ -19,18 +19,18 @@
                         <a href="{{url('')}}" class="m-0 text-center td-none text-dark">Beranda</a>
                     </div>
                     <div class="col-lg-3 pb-3 pb-lg-0 d-flex justify-content-center">
-                        <a href="{{url('')}}" class="m-0 text-center td-none text-dark">Tentang</a>
+                        <a href="{{url('ruangan')}}" class="m-0 text-center td-none text-dark">Ruangan</a>
+                    </div>
+                    <div class="col-lg-3 pb-3 pb-lg-0 d-flex justify-content-center">
+                        <a href="{{url('tentang')}}" class="m-0 text-center td-none text-dark">Tentang</a>
                     </div>
                     <div class="col-lg-3 pb-3 pb-lg-0 d-flex justify-content-center">
                         <a href="{{url('')}}" class="m-0 text-center td-none text-dark">Kegiatan</a>
                     </div>
-                    <div class="col-lg-3 pb-3 pb-lg-0 d-flex justify-content-center">
-                        <a href="{{url('')}}" class="m-0 text-center td-none text-dark">Pemesanan</a>
-                    </div>
                 </div>
             </div>
             <div class="col-lg-3 pt-4 pb-2 d-none d-lg-flex justify-content-center align-items-center navbar-home-resp">
-                <div class="position-relative m-0">
+                <div class="position-relative m-0" id="navbar-home-container-login">
                     @if (session()->has('is_user'))
                         <a href="{{url('profil')}}" class="btn btn-outline-light rounded-pill pt-2 px-5 fsz-10 position-absolute" id="button-login">PROFIL</a>
                         <p class="btn btn-outline-light btn-lg-dark rounded-pill pt-2 px-5 fsz-10" id="navbar-home-button">PROFIL</p>

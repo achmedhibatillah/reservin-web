@@ -2,17 +2,32 @@ const navbar_home_content = document.getElementById('navbar-home-content')
 const navbar_home_menu = document.getElementById('navbar-home-menu')
 const navbar_home_button = document.getElementById('navbar-home-button')
 
+const navbar_home_container_logo = document.getElementById('navbar-home-container-logo')
+const navbar_home_container_login = document.getElementById('navbar-home-container-login')
+
 function updateScreen() {
     if (window.innerWidth <= 991) {
         navbar_home_button.classList.remove('btn-outline-light', 'shadow-m')
         navbar_home_button.classList.add('btn-dark')
         navbar_home_content.classList.add('shadow-m')
         navbar_home_menu.classList.remove('shadow-m')
+
+        // navbar_home_content.classList.add('bg-danger')
+        // navbar_home_content.classList.remove('bg-transparent')
+
+        // navbar_home_content.classList.add('bg-transparent')
+        // navbar_home_content.classList.remove('bg-clrdang')
     } else {
         navbar_home_button.classList.remove('btn-dark')
         navbar_home_button.classList.add('btn-outline-light', 'shadow-m')
         navbar_home_content.classList.remove('shadow-m')
         navbar_home_menu.classList.add('shadow-m')
+
+        // navbar_home_content.classList.add('bg-transparent')
+        // navbar_home_content.classList.remove('bg-danger')
+
+        // navbar_home_content.classList.add('bg-clrdang')
+        // navbar_home_content.classList.remove('bg-transparent')
     }
 }
 updateScreen();
@@ -61,10 +76,24 @@ window.addEventListener('scroll', function () {
     
     if (window.scrollY >= 200 && button) {
       button.id = 'button-login-scrolled';
+
+      if (window.innerWidth >= 991) {
+        navbar_home_container_logo.classList.add('d-none')
+        navbar_home_container_logo.classList.remove('d-flex')
+        navbar_home_container_login.classList.add('d-none')
+        navbar_home_container_login.classList.remove('d-flex')
+      }
     } else {
       const scrolledButton = document.getElementById('button-login-scrolled');
       if (window.scrollY < 200 && scrolledButton) {
         scrolledButton.id = 'button-login';
+
+        if (window.innerWidth >= 991) {
+            navbar_home_container_logo.classList.add('d-flex')
+            navbar_home_container_logo.classList.remove('d-none')
+            navbar_home_container_login.classList.add('d-flex')
+            navbar_home_container_login.classList.remove('d-none')
+        }
       }
     }
   });

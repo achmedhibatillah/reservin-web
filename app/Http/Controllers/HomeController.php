@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Booking;
 use App\Models\Qris;
 use App\Models\Room;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,15 +24,38 @@ class HomeController extends Controller
         view('templates/footer');
     }
 
+    public function tentang()
+    {
+        return 
+        view('templates/header') . 
+        view('templates/navbar') . 
+        view('home/tentang') . 
+        view('templates/footbar') . 
+        view('templates/footer');   
+    }
+
     public function ruangan(Request $request)
     {
         $page = $request->get('page', 1);
-        $roomData = Room::getPageRoom(5, $page);
         $k = '';
-
+        $schedule = [
+            'date' => '',
+            'start' => '',
+            'end' => ''
+        ];
+    
         if ($request->has('k')) {
-            $roomData = Room::searchRoomByName($k, 5);
             $k = $request->k;
+            $roomData = Room::searchRoomByName($k, 5, $page);
+        } elseif ($request->has('date')) {
+            $roomData = Room::searchRoomBySchedule($request->date, $request->start, $request->end, 5, $page);
+            $schedule = [
+                'date' => $request->date,
+                'start' => $request->start,
+                'end' => $request->end
+            ];
+        } else {
+            $roomData = Room::getPageRoom(5, $page);
         }
     
         return 
@@ -39,11 +63,12 @@ class HomeController extends Controller
             view('templates/navbar') . 
             view('home/ruangan', [
                 'k' => $k,
+                'schedule' => $schedule,
                 'room' => $roomData
             ]) . 
             view('templates/footbar') . 
             view('templates/footer');
-    }
+    }    
 
     public function ruangan_detail($room_id)
     {
@@ -141,6 +166,8 @@ class HomeController extends Controller
         $bookingData = $bookingData['data'];
         $bookingData['booking_price_formated'] = session('booking_data')['booking_price_formated'];
         $bookingData['booking_duration'] = session('booking_data')['booking_duration'];
+        $bookingData['start_payment'] = Carbon::parse($bookingData['created_at'])->format('Y-m-d H:i');
+        $bookingData['end_payment'] = Carbon::parse($bookingData['created_at'])->addMinutes(5)->format('Y-m-d H:i');
         
         $roomData = Room::getDetailRoom($bookingData['room_id']);
 

@@ -10,8 +10,11 @@
 
     <link rel="stylesheet" href="{{url('assets/css/main-style.css')}}">
     <link rel="stylesheet" href="{{url('assets/css/app-style.css')}}">
+    <link rel="stylesheet" href="{{url('assets/css/aos.css')}}">
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    <link href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick-theme.css"/>

@@ -26,7 +26,7 @@
             </div>
             <div class="mb-3">
                 <label for="customer_email" class="fsz-10">Email</label>
-                <input type="text" name="customer_email" class="form-control fsz-10 he-40 @error('customer_email') is-invalid @enderror" id="customer_email" value="{{ old('customer_email') }}" placeholder="reservin@gmail.com">
+                <input type="email" name="customer_email" class="form-control fsz-10 he-40 @error('customer_email') is-invalid @enderror" id="customer_email" value="{{ old('customer_email') }}" placeholder="reservin@gmail.com">
                 @error('customer_email')
                     <div class="fsz-8 text-danger mt-2 ms-2"><i class="fas fa-exclamation-circle me-1"></i>{{ $message }}</div>
                 @enderror

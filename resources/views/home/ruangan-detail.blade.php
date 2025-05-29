@@ -13,7 +13,7 @@
                     @if(count($room['images']) === 0)
                         <img src="{{ asset('assets/images/static/blank-room.svg') }}" class="rounded" style="width:60%;">
                     @elseif(count($room['images']) === 1)
-                        <img src="{{ $room['images'][0]['ri_image'] }}" alt="">
+                        <img src="{{ $room['images'][0]['ri_image'] }}" class="w-100">
                     @elseif(count($room['images']) === 2)
                         <div class="row">
                             <div class="col-md-6 p-1">

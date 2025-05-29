@@ -3,10 +3,10 @@
         <div class="row">
             <div class="col-md-6 d-flex justify-content-center align-items-center">
                 <div class="text-center text-md-start">
-                    <h4 class="text-light fw-900">Pesan Ruangan<br>Acara Anda di</h4>
-                    <h1 class="fw-900 text-clr2" style="font-size:40px">ReservIN</h1>
-                    <p class="text-light" style="max-width:300px">Solusi cerdas untuk Anda yang ingin memesan ruangan acara dengan mudah, cepat, dan tanpa ribet.</p>
-                    <a href="{{ url('booking') }}" class="btn btn-clr2">Pesan sekarang</a>
+                    <h4 class="text-light fw-900" data-aos="fade-up" data-aos-delay="10" data-aos-easing="ease-in-out-back">Pesan Ruangan<br>Acara Anda di</h4>
+                    <h1 class="fw-900 text-clr2" style="font-size:40px" data-aos="fade-up" data-aos-delay="50" data-aos-easing="ease-in-out-back">ReservIN</h1>
+                    <p class="text-light" style="max-width:300px" data-aos="fade-up" data-aos-delay="100" data-aos-easing="ease-in-out-back">Solusi cerdas untuk Anda yang ingin memesan ruangan acara dengan mudah, cepat, dan tanpa ribet.</p>
+                    <a href="{{ url('booking') }}" class="btn btn-clr2" data-aos="fade-up" data-aos-delay="150" data-aos-easing="ease-in-out-back">Pesan sekarang</a>
                 </div>
             </div>
         </div>
@@ -15,21 +15,36 @@
 
 <div class="bg-clr1 position-relative" style="min-height:200px">
     <div class="position-relative translate-center d-flex justify-content-center bg-clr1 w-100" style="left:50%;background:linear-gradient(to bottom, transparent, var(--clr1) 50%" id="transition">
-        <div class="container mt-5" style="">
+        <div class="container mt-5" data-aos="fade-down" data-aos-delay="10" data-aos-easing="ease-in-out-back">
             <img src="{{ asset('assets/images/static/resv-style-1.svg') }}" class="w-100">
         </div>
     </div>
     <div class="container">
-        <h1 class="text-clr2 fw-800 text-center">RUANGAN</h1>
-        <div class="data-room mt-5">
+        <h1 class="text-clr2 fw-800 text-center" data-aos="fade-up" data-aos-delay="200" data-aos-easing="ease-in-out-back">RUANGAN</h1>
+        <div class="data-room mt-5" data-aos="fade-up" data-aos-delay="10" data-aos-easing="ease-in-out-back">
             @foreach($roomslide as $index => $x)
             <div class="d-flex justify-content-center position-relative m-0 p-0">
-                <div class="card border-clr3 shadow m-0 position-relative overflow-hidden" onclick="window.location.href='<?= url('ruangan/' . $x['room_id']) ?>'">
-                    <div class="d-flex justify-content-center align-items-center overflow-hidden" style="width:200px;aspect-ratio:3/4;">
+                <div class="card border-clr3 rounded-m shadow m-0 pb-3 cursor-pointer position-relative overflow-hidden card-room" onclick="window.location.href='<?= url('ruangan/' . $x['room_id']) ?>'">
+                    <div class="d-flex shadow-m justify-content-center align-items-center overflow-hidden m-3 rounded-m card-room-image" style="width:180px;aspect-ratio:4/5;">
+                        @if(count($x['images']) === 0)
+                            <img src="{{ asset('assets/images/static/blank-room.svg') }}" class="img-cover">
+                        @else
+                            <img src="{{ $x['images'][0]['ri_image'] }}" class="img-cover">
+                        @endif
                     </div>
-                    <div class="position-absolute gradient-overlay w-100 text-center text-clr5 px-3" style="bottom:0;padding-top:42px;">
-                        <div class="m-0 mb-2 lh-xs he-55 d-flex align-items-center justify-content-center shadow-l px-2" style="border-top:1px solid var(--clr5);">
-                            <a href="{{ url('ruangan/' . $x['room_id']) }}" class="td-hover text-clr5" style="line-height:1;">{{ $x['room_name'] }}</a>
+                    <div class="w-100 px-3">
+                        <p class="text-primary fw-800 m-0">{{ $x['room_name'] }}</p>
+                        <p class="text-clr2 fw-bold text-end m-0">Rp. {{ $x['room_price'] }}</p>
+                        <p class="fsz-9 text-secondary text-end">/ hari</p>
+                        <div class="d-flex gap-2">
+                            <div class="d-flex align-items-center gap-1 fsz-10">
+                                <i class="fas fa-user"></i>
+                                <p class="m-0">{{ $x['room_capacity'] }} orang</p>
+                            </div>
+                            <div class="d-flex align-items-center gap-1 fsz-10">
+                                <i class="fas fa-circle"></i>
+                                <p class="m-0">{{ $x['room_kategori'] }}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -37,29 +52,29 @@
             @endforeach
         </div>
         <div class="d-flex justify-content-center mt-5">
-            <a href="{{ url('ruangan') }}" class="btn btn-clr2">Lihat selengkanya</a>
+            <a href="{{ url('ruangan') }}" class="btn btn-clr2" data-aos="fade-up" data-aos-delay="50" data-aos-easing="ease-in-out-back">Lihat selengkanya</a>
         </div>
-        <div class="mt-5">lorem</div>
+        <div class="mt-5">.</div>
     </div>
 </div>
 <div class="bg-clr3 position-relative pb-5">
     <div class="container">
-        <img src="{{ asset('assets/images/static/dec-top-1.svg') }}" alt="">
+        <img src="{{ asset('assets/images/static/dec-top-1.svg') }}" data-aos="fade-up" data-aos-delay="10" data-aos-easing="ease-in-out-back">
         <div class="row mt-5">
             <div class="col-md-7 pb-md-5 d-flex flex-column justify-content-center">
-                <h3 class="text-light fw-bold">Gedung Kreativitas Mahasiswa</h3>
-                <p class="text-light mt-3">"Open space area" dapat diartikan sebagai area terbuka, yaitu ruang yang tidak tertutup oleh bangunan dan biasanya digunakan untuk keperluan umum, seperti taman, alun-alun, atau lapangan.</p>
+                <h3 class="text-light fw-bold" data-aos="fade-up" data-aos-delay="100" data-aos-easing="ease-in-out-back">Gedung Kreativitas Mahasiswa</h3>
+                <p class="text-light mt-3" data-aos="fade-up" data-aos-delay="200" data-aos-easing="ease-in-out-back">"Open space area" dapat diartikan sebagai area terbuka, yaitu ruang yang tidak tertutup oleh bangunan dan biasanya digunakan untuk keperluan umum, seperti taman, alun-alun, atau lapangan.</p>
             </div>
-            <div class="col-md-5 d-flex align-items-center">
+            <div class="col-md-5 d-flex align-items-center" data-aos="zoom-in" data-aos-delay="300" data-aos-easing="ease-in-out-back">
                 <img src="{{ asset('assets/images/static/dec-room-1.svg') }}" class="w-75">
             </div>
         </div>
     </div>
 </div>
-<div class="bg-clr3 py-5">
+{{-- <div class="bg-clr3 py-5">
     <div class="container">
-        <h1 class="text-center text-clr2 fw-900 mb-5">KEGIATAN</h1>
-        <div class="row">
+        <h1 class="text-center text-clr2 fw-900 mb-5" data-aos="fade-up" data-aos-delay="10" data-aos-easing="ease-in-out-back">KEGIATAN</h1>
+        <div class="row" data-aos="fade-up" data-aos-delay="100" data-aos-easing="ease-in-out-back">
             <div class="col-md-6 col-lg-3 p-2">
                 <div class="card bg-light mb-3">
                     img
@@ -67,11 +82,11 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 <div class="bg-clr3 py-5">
     <div class="container mb-5">
-        <h1 class="text-center text-clr2 fw-900 mb-4">GALERI</h1>
-        <div class="marquee marquee-top">
+        <h1 class="text-center text-clr2 fw-900 mb-4" data-aos="fade-up" data-aos-delay="10" data-aos-easing="ease-in-out-back">GALERI</h1>
+        <div class="marquee marquee-top" data-aos="fade-down" data-aos-delay="300" data-aos-easing="ease-in-out-back">
             <div class="marquee-content">
               <img src="{{ asset('assets/images/dynamic/gallery/1.svg') }}" class="gal-top">
               <img src="{{ asset('assets/images/dynamic/gallery/2.svg') }}" class="gal-top">
@@ -84,7 +99,7 @@
             </div>
           </div>
           
-          <div class="marquee marquee-bottom mt-2">
+          <div class="marquee marquee-bottom mt-2" data-aos="fade-up" data-aos-delay="400" data-aos-easing="ease-in-out-back">
             <div class="marquee-content">
               <img src="{{ asset('assets/images/dynamic/gallery/7.svg') }}" class="gal-bottom">
               <img src="{{ asset('assets/images/dynamic/gallery/8.svg') }}" class="gal-bottom">
@@ -107,6 +122,9 @@
 .slick-prev:hover:before, .slick-next:hover:before { color: #ffffff; }
 .gradient-overlay { cursor: pointer; white; height: 50%; }
 .gradient-overlay:hover .img-hover { transform: scale(1.05); }
+
+.card-room-image { transition: transform 0.3s ease; }
+.card-room:hover .card-room-image { transform: scale(1.05); }
 </style>
 <script>
 $(document).ready(function(){
@@ -117,7 +135,7 @@ $(document).ready(function(){
         infinite: true,
         speed: 500,
         slidesToShow: 5,
-        centerMode: true,
+        // centerMode: true,
         centerPadding: '60px', 
         slidesToScroll: 1,
         responsive: [
@@ -130,7 +148,7 @@ $(document).ready(function(){
             {
                 breakpoint: 576,
                 settings: {
-                    slidesToShow: 3,
+                    slidesToShow: 1,
                 }
             }
         ]

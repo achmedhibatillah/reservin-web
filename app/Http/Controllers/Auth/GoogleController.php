@@ -16,7 +16,7 @@ class GoogleController extends Controller
 
     public function callback()
     {
-        $page = session()->has('page_redirect') ? session('page_redirect') : 'profile';
+        $page = session()->has('page_redirect') ? session('page_redirect') : 'profil';
         
         $googleUser = Socialite::driver('google')->user();
 
@@ -41,6 +41,14 @@ class GoogleController extends Controller
             ]
         );
 
-        return redirect()->to('login')->with('success', 'Berhasil membuat akun');
+        // dd($user);
+
+        session([
+            'is_user' => true,
+            'customer' => $user['customer']
+        ]);
+
+        session()->forget('page_redirect');
+        return redirect()->to($page);
     }
 }
