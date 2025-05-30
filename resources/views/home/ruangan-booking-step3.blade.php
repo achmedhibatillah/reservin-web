@@ -57,6 +57,13 @@
                                 <p class="m-0 fw-bold" id="booking_price_display">{{ $booking['booking_price_formated'] }}</p>
                             </div>
                         </div>
+                        <form action="{{ url('paid-off') }}" method="post">
+                            @csrf 
+                            <input type="hidden" name="booking_id" value="{{ $booking['booking_id'] }}">
+                            <input type="hidden" name="room_id" value="{{ $room['room_id'] }}">
+                            
+                            <button type="submit">Simpan</button>
+                        </form>
                     </div>
                 </div>
             </div>

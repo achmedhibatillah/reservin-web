@@ -1,19 +1,25 @@
 #navbar-home {
     position: fixed;
     width: 100%;
+    margin-top: 20px;
 }
 
 #navbar-home-menu {
-    background-color: #F0EFEF;
-    border-end-start-radius: 40px;
-    border-end-end-radius: 40px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(81, 91, 149, 0.7));
+    border-radius: 40px;
+}
+
+#navbar-home-button {
+    height: 30px;
+    width: 120px;
 }
 
 #button-login {
     border: 1px solid #ffffff;
-    background-color: #ffffff;
     color: #ffffff;
-    opacity: 0.2;
+    opacity: 0.7;
+    height: 30px;
+    width: 120px;
 }
 
 #button-login-scrolled {
@@ -42,8 +48,11 @@
 
 
 @media screen and (max-width: 992px) {
+    #navbar-home {
+        margin-top: 0;
+    }
     #navbar-home-content {
-        background-color: #F0EFEF;
+        background-color: rgba(255, 255, 255, 0.7);
         border-end-start-radius: 40px;
         border-end-end-radius: 40px;
     }
@@ -66,7 +75,7 @@
     --clrsec: #4D5259;
     --clrgold: #FA8B02;
     --clrsecgold: #8b5411;
-    --clrprim: #c4f3fc;
+    --clrprim: #3498db;
     --clrsuc: #25cb00;
 }
 
@@ -77,12 +86,19 @@
 .bg-clrdang { background-color: var(--clrsecdang); }
 .bg-clrdark { background-color: var(--clrdark); }
 .bg-clrsec { background-color: var(--clrsec); }
+.bg-clrsuc { background-color: var(--clrsuc); }
 .bg-clrgold { background-color: var(--clrgold); }
 .bg-clrprim { background-color: var(--clrprim); }
 
 .border-clrgold { border: 1px solid var(--clrgold); }
 .border-clrsecgold { border: 1px solid var(--clrgold); }
 
+.btn-clrsuc { background-color: var(--clrsuc); color: #ffffff; }
+.btn-clrsuc:hover { background-color: var(--clrsuc); color: #ffffff; filter: brightness(90%); }
+.btn-clrprim { background-color: var(--clrprim); color: #ffffff; }
+.btn-clrsec:hover { background-color: var(--clrsec); color: #ffffff; filter: brightness(90%); }
+.btn-clrsec { background-color: var(--clrsec); color: #ffffff; }
+.btn-clrprim:hover { background-color: var(--clrprim); color: #ffffff; filter: brightness(90%); }
 .btn-clrdang { background-color: var(--clrdang); color: #ffffff; }
 .btn-clrdang:hover { background-color: var(--clrdang); color: #ffffff; filter: brightness(90%); }
 .btn-clrsecdark { background-color: var(--clrsecdark); color: #ffffff; }

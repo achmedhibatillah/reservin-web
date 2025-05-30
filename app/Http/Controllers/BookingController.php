@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Booking;
 use App\Models\Qris;
 use App\Models\Room;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class BookingController extends Controller
 {
@@ -98,8 +100,6 @@ class BookingController extends Controller
             'booking_price' => $bookingData['booking_price'],
             'booking_desc' => $request->booking_desc,
         ]);
-
-        // dd($response);
         
         $bookingResponse = Booking::getDetailBooking($response['data']['booking_id']);
         $bookingData['booking_code'] = $bookingResponse['booking_code'];
@@ -126,4 +126,66 @@ class BookingController extends Controller
         return redirect()->to('booking-pembayaran/' . $bookingResponse['booking_code']);
         
     }
+
+    // public function paid_off(Request $request)
+    // {
+    //     $booking = Booking::getDetailBooking($request->booking_id);
+
+    //     $booked = Room::getDetailRoomWIthSchedule($request->room_id);
+
+    //     foreach ($booked as $x) {
+    //         if ($x['booking_id'] !== $request['room_id'] && $x['booking_status'] == 1) {
+    //             if ($x['booking_date'] == $booking['booking_date']) {
+    //                 // Jika $booking['booking_start'] - $booking['booking_end'] bertabrakan dengan $x['booking_start] - $x['booking_end'] maka return redirect back aja
+    //             }
+    //         }
+    //     }
+
+    //     if (!empty($booked) && $booked['']) {
+    //         return redirect()->to('ruangan/' . $request->room_id)->with('error', 'Anda tidak dapat memesannya disebabkan telah dibooking pada jadwal tersebut.');
+    //     }
+
+    //     Booking::paid_off([
+    //         'booking_id' => $request->booking_id,
+    //     ]);
+
+    //     return redirect()->back();
+    // }
+
+    public function paid_off(Request $request)
+    {
+        $booking = Booking::getDetailBooking($request->booking_id);
+        $booked = Room::getDetailRoomWIthSchedule($request->room_id);
+
+        // dd($booking);
+        $createdAt = Carbon::parse($booking['created_at']);
+        $now = Carbon::now();
+        
+        if (Carbon::now()->greaterThan(Carbon::parse($booking['created_at'])->addMinutes(5))) {
+            return redirect()->to('ruangan/' . $booking['room_id'])
+                ->with('error', 'Sesi pembayaran Anda telah habis, silakan lakukan booking ulang.');
+        }        
+
+        if (!empty($booked['schedule'])) {
+            foreach ($booked['schedule'] as $x) {
+                if ($x['booking_id'] !== $booking['booking_id'] && $x['booking_status'] == 1) {
+                    if ($x['booking_date'] == $booking['booking_date']) {
+                        $startA = strtotime($booking['booking_start']);
+                        $endA = strtotime($booking['booking_end']);
+                        $startB = strtotime($x['booking_start']);
+                        $endB = strtotime($x['booking_end']);
+
+                        if ($startA < $endB && $endA > $startB) {
+                            return redirect()->to('ruangan/' . $booking['room_id'])->with('error', 'Waktu peminjaman yang Anda pilih bertabrakan dengan peminjam lain. Silakan pilih waktu lain.');
+                        }
+                    }
+                }
+            }
+        }
+
+        $response = Booking::paid_off($request->booking_id);
+
+        return redirect()->to('/profil')->with('success', 'Anda berhasil membooking ruangan ini.');
+    }
+
 }

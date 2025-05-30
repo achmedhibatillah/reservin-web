@@ -6,14 +6,14 @@
 <div class="bg-clr3">
     <div class="container py-5">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-8 order-2 order-md-1">
                 <div class="">
                     @foreach ($room as $x)
                         <div class="card border-none rounded-m bg-light overflow-hidden mb-4">
                             <div class="row" style="min-height:200px">
                                 <div class="col-4 bg-web" style="background-image: url('{{ isset($x['images'][0]['ri_image']) ? $x['images'][0]['ri_image'] : asset('assets/images/static/blank-room.svg') }}');">
                                 </div>                                
-                                <div class="col-8 d-flex flex-column p-3">
+                                <div class="col-8 d-flex flex-column p-3 pe-4">
                                     <h5 class="text-dark fw-bold">{{ $x['room_name'] }}</h5>
                                     <div class="d-flex">
                                         <div class="fsz-10 bg-clrprim m-0 text-primary shadow-s px-2 rounded-pill">{{ $x['room_kategori'] }}</div>
@@ -55,7 +55,7 @@
                     @include('templates/pagination', ['xxx' => $room])
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 order-1 order-md-2">
                 <div class="card p-4 mb-3">
                     <h5 class="fw-bold">Cari ruangan</h5>
                     <p class="m-0 fsz-10 text-secondary">Cari berdasarkan nama.</p>

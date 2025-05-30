@@ -45,7 +45,7 @@ class GoogleController extends Controller
 
         session([
             'is_user' => true,
-            'customer' => $user['customer']
+            'customer' => $user['data']
         ]);
 
         session()->forget('page_redirect');

@@ -20,6 +20,13 @@ Route::get('tentang', [HomeController::class, 'tentang']);
 Route::middleware([CustomerMiddleware::class])->group(function () {
     Route::get('profil', [ProfilController::class, 'index']);
 
+    Route::post('profil/edit-nama', [ProfilController::class, 'edit_nama']);
+    Route::post('profil/edit-pass', [ProfilController::class, 'edit_pass']);
+    Route::post('profil/hapus-akun', [ProfilController::class, 'hapus_akun']);
+
+    Route::get('riwayat', [ProfilController::class, 'riwayat']);
+    Route::get('riwayat/{slug}', [ProfilController::class, 'riwayat']);
+
     Route::get('booking/{slug}', [HomeController::class, 'booking']);
     Route::get('booking-konfirmasi/{slug}', [HomeController::class, 'booking_konfirmasi']);
     Route::get('booking-pembayaran/{slug}', [HomeController::class, 'booking_pembayaran']);
@@ -27,6 +34,7 @@ Route::middleware([CustomerMiddleware::class])->group(function () {
     Route::post('booking', [BookingController::class, 'booking']);
     Route::post('booking-konfirmasi', [BookingController::class, 'booking_konfirmasi']);
     Route::post('booking-pembayaran', [BookingController::class, 'booking_pembayaran']);
+    Route::post('paid-off', [BookingController::class, 'paid_off']);
 });
 
 Route::get('login', [AuthController::class, 'showLoginForm']);

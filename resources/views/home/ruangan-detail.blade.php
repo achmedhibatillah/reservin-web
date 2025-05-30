@@ -9,6 +9,11 @@
         <div class="row m-0" style="padding-top:160px;padding-bottom:110px">
             <div class="col-md-7">
                 <h1 class="text-clr2 fw-900 text-shadow">{{ $room['room_name'] }}</h1>
+                @if (session()->has('error'))
+                    <div class="mb-3">
+                        @include('templates/flashdata')      
+                    </div>                  
+                @endif
                 <div class="mt-3">
                     @if(count($room['images']) === 0)
                         <img src="{{ asset('assets/images/static/blank-room.svg') }}" class="rounded" style="width:60%;">

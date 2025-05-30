@@ -48,4 +48,12 @@ class Profil extends Model
         return $avatarUrl;
     }
     
+    public static function getRiwayatByCustomer($customer_id)
+    {
+        $response = Http::get(env('API_SERVER') . 'booking/customer/' . $customer_id, [
+            'access_token' => env('API_ACCESS_TOKEN'),
+        ]);
+
+        return $response->json();
+    }
 }

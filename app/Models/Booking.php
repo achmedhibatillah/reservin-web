@@ -56,4 +56,25 @@ class Booking extends Model
 
         return $response->json();
     }
+
+    public static function paid_off($booking_id)
+    {
+        $response = Http::put(env('API_SERVER') . 'booking/update', [
+            'access_token' => env('API_ACCESS_TOKEN'),
+            'booking_id' => $booking_id,
+            'booking_status' => 1
+        ]);
+
+        return $response->json();
+    }
+
+    public static function getBookingByCode($booking_code)
+    {
+        $response = Http::post(env('API_SERVER') . 'booking/detail-code', [
+            'access_token' => env('API_ACCESS_TOKEN'),
+            'booking_code' => $booking_code,
+        ]);
+
+        return $response->json();
+    }
 }

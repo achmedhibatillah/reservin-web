@@ -11,23 +11,11 @@ function updateScreen() {
         navbar_home_button.classList.add('btn-dark')
         navbar_home_content.classList.add('shadow-m')
         navbar_home_menu.classList.remove('shadow-m')
-
-        // navbar_home_content.classList.add('bg-danger')
-        // navbar_home_content.classList.remove('bg-transparent')
-
-        // navbar_home_content.classList.add('bg-transparent')
-        // navbar_home_content.classList.remove('bg-clrdang')
     } else {
         navbar_home_button.classList.remove('btn-dark')
         navbar_home_button.classList.add('btn-outline-light', 'shadow-m')
         navbar_home_content.classList.remove('shadow-m')
         navbar_home_menu.classList.add('shadow-m')
-
-        // navbar_home_content.classList.add('bg-transparent')
-        // navbar_home_content.classList.remove('bg-danger')
-
-        // navbar_home_content.classList.add('bg-clrdang')
-        // navbar_home_content.classList.remove('bg-transparent')
     }
 }
 updateScreen();
