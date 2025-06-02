@@ -73,6 +73,17 @@ class ProfilController extends Controller
                 $riwayat = Booking::getBookingByCode($slug);
                 if ($riwayat['status'] == 'success') {
                     $riwayat = $riwayat['data'];
+                    $start = Carbon::parse($riwayat['booking_date'] . ' ' . $riwayat['booking_start']);
+                    $end = Carbon::parse($riwayat['booking_date'] . ' ' . $riwayat['booking_end']);
+                    $now = Carbon::now();
+            
+                    if ($now->lessThan($start)) {
+                        $riwayat['position'] = 'upcoming';
+                    } elseif ($now->between($start, $end)) {
+                        $riwayat['position'] = 'ongoing';
+                    } else {
+                        $riwayat['position'] = 'past';
+                    }
                 } else {
                     return redirect()->to('riwayat');
                 }

@@ -127,31 +127,6 @@ class BookingController extends Controller
         
     }
 
-    // public function paid_off(Request $request)
-    // {
-    //     $booking = Booking::getDetailBooking($request->booking_id);
-
-    //     $booked = Room::getDetailRoomWIthSchedule($request->room_id);
-
-    //     foreach ($booked as $x) {
-    //         if ($x['booking_id'] !== $request['room_id'] && $x['booking_status'] == 1) {
-    //             if ($x['booking_date'] == $booking['booking_date']) {
-    //                 // Jika $booking['booking_start'] - $booking['booking_end'] bertabrakan dengan $x['booking_start] - $x['booking_end'] maka return redirect back aja
-    //             }
-    //         }
-    //     }
-
-    //     if (!empty($booked) && $booked['']) {
-    //         return redirect()->to('ruangan/' . $request->room_id)->with('error', 'Anda tidak dapat memesannya disebabkan telah dibooking pada jadwal tersebut.');
-    //     }
-
-    //     Booking::paid_off([
-    //         'booking_id' => $request->booking_id,
-    //     ]);
-
-    //     return redirect()->back();
-    // }
-
     public function paid_off(Request $request)
     {
         $booking = Booking::getDetailBooking($request->booking_id);
@@ -185,7 +160,7 @@ class BookingController extends Controller
 
         $response = Booking::paid_off($request->booking_id);
 
-        return redirect()->to('/profil')->with('success', 'Anda berhasil membooking ruangan ini.');
+        return redirect()->to('riwayat/' . $response['olddata']['booking_code'])->with('success', 'Anda berhasil membooking ruangan ini.');
     }
 
 }

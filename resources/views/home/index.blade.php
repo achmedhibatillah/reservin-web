@@ -1,7 +1,7 @@
 <div class="bg-web" style="max-width:100%;background-image: url('assets/images/static/bg-top.svg');padding-top:260px;padding-bottom:250px;">
     <div class="container">
         <div class="row">
-            <div class="col-md-6 order-2 order-md-1 d-flex justify-content-center align-items-center">
+            <div class="col-12 col-md-6 order-2 order-md-1 d-flex justify-content-center align-items-center">
                 <div class="text-center text-md-start ms-0 ms-md-4 ms-lg-0">
                     <h4 class="text-light fw-900" data-aos="fade-up" data-aos-delay="10" data-aos-easing="ease-in-out-back">Pesan Ruangan<br>Acara Anda di</h4>
                     <h1 class="fw-900 text-clr2" style="font-size:40px" data-aos="fade-up" data-aos-delay="50" data-aos-easing="ease-in-out-back">ReservIN</h1>
@@ -9,7 +9,7 @@
                     <a href="{{ url('booking') }}" class="btn btn-clr2" data-aos="fade-up" data-aos-delay="150" data-aos-easing="ease-in-out-back">Pesan sekarang</a>
                 </div>
             </div>
-            <div class="col-md-6 order-1 order-md-2 d-flex justify-content-center align-items-center">
+            <div class="col-12 col-md-6 order-1 order-md-2 d-flex justify-content-center align-items-center">
                 <div class="d-flex justify-content-center align-items-center bg-light rounded-circle p-5 shadow-l mb-5 mb-md-0" style="width:150px;height:150px;" data-aos="zoom-out" data-aos-delay="220" data-aos-easing="ease-in-out-back">
                     <img src="{{ asset('assets/images/static/logo.svg') }}" class="w-100 mt-2 ms-2" data-aos="zoom-in" data-aos-delay="400" data-aos-easing="ease-in-out-back">
                 </div>

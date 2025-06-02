@@ -83,7 +83,6 @@
 .text-clrsuc { color: var(--clrsuc); }
 .text-clrdang { color: var(--clrdang); }
 
-.bg-clrdang { background-color: var(--clrsecdang); }
 .bg-clrdark { background-color: var(--clrdark); }
 .bg-clrsec { background-color: var(--clrsec); }
 .bg-clrsuc { background-color: var(--clrsuc); }
